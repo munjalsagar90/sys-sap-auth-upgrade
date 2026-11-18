@@ -11,22 +11,40 @@ http://www.mulesoft.org/schema/mule/sap http://www.mulesoft.org/schema/mule/sap/
 	     All values are loaded from config.properties via property placeholders. -->
 	<sap:sap-config name="SAP_Config" doc:name="SAP Config" doc:id="07a5536e-1c57-4749-b7ff-86e8080df025" >
 		<sap:simple-connection-provider-connection
-			username="${sap.username}"
-			password="${sap.password}"
-			systemNumber="${sap.system.number}"
-			client="${sap.client}"
-			applicationServerHost="${sap.app.server.host}" >
-		</sap:simple-connection-provider-connection>
+            username="${zuul::sap1.user}"
+            password="${zuul::sap1.password}"
+            client="${zuul::sap1.client}"
+            systemNumber="${zuul::sap1.sysno}">
+            <sap:extended-properties>
+                <sap:extended-property key="jco.client.mshost" value="${zuul::sap1.host}"/>
+                <sap:extended-property key="jco.client.msserv" value="${zuul::sap1.port}"/>
+                <sap:extended-property key="jco.client.group"  value="${zuul::sap1.logon.group}"/>
+            </sap:extended-properties>
+            <sap:message-server
+                host="${zuul::sap1.host}"
+                systemId="${zuul::sap1.r3Name}"
+                port="${zuul::sap1.port}"
+                group="${zuul::sap1.logon.group}"/>
+        </sap:simple-connection-provider-connection>
 	</sap:sap-config>
 	
 	<sap:sap-config name="SAP_Config1" doc:name="SAP Config1" doc:id="162526fd-356a-4b115-b6c5-2af32aaaa233" >
 		<sap:simple-connection-provider-connection
-			username="${sap1.username}"
-			password="${sap1.password}"
-			systemNumber="${sap.system.number}"
-			client="${sap.client}"
-			applicationServerHost="${sap.app.server.host}" >
-		</sap:simple-connection-provider-connection>
+            username="${zuul::sap2.user}"
+            password="${zuul::sap2.password}"
+            client="${zuul::sap2.client}"
+            systemNumber="${zuul::sap2.sysno}">
+            <sap:extended-properties>
+                <sap:extended-property key="jco.client.mshost" value="${zuul::sap2.host}"/>
+                <sap:extended-property key="jco.client.msserv" value="${zuul::sap2.port}"/>
+                <sap:extended-property key="jco.client.group"  value="${zuul::sap2.logon.group}"/>
+            </sap:extended-properties>
+            <sap:message-server
+                host="${zuul::sap2.host}"
+                systemId="${zuul::sap2.r3Name}"
+                port="${zuul::sap2.port}"
+                group="${zuul::sap2.logon.group}"/>
+        </sap:simple-connection-provider-connection>
 	</sap:sap-config>
 	
 
